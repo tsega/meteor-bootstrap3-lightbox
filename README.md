@@ -8,7 +8,6 @@ Bootstrap 3 Lightbox from [ashleydw](https://github.com/ashleydw/lightbox) packa
 ```sh
 $ mrt add bootstrap3-lightbox
 ```
-
 ## Usage via data attributes
 
 Set up your markup as in the example below. I use it primarily for images so the example reflects that.
@@ -25,6 +24,18 @@ Set up your markup as in the example below. I use it primarily for images so the
 .
 .
 </template>
+```
+Then delegate calls to `data-toggle="lightbox"`. (I'm suprised that I needed to do this to make the lightbox work.)
+
+```javascript
+Template.temName.helpers({
+  rendered: function(){
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+      event.preventDefault();
+      return $(this).ekkoLightbox();
+    });
+  }
+});
 ```
 
 ## Usage via JavaScript
