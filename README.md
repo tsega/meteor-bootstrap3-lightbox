@@ -25,16 +25,16 @@ Set up your markup as in the example below. I use it primarily for images so the
 .
 </template>
 ```
-Then delegate calls to `data-toggle="lightbox"`. (I'm suprised that I needed to do this to make the lightbox work.)
+
+Then delegate calls to `data-toggle="lightbox"`. I'm suprised that this needed. Normally, I would put this code in the `rendered` template helper method but because of the way the new [Blaze templating engine works](https://github.com/meteor/meteor/wiki/Using-Blaze#rendered-callback-only-fires-once), this method will not be called everytime. However, adding a normal client side script does the job. So create a new JavaScript file, e.g. `client/js/client.js` and add the following.
 
 ```javascript
-Template.temName.helpers({
-  rendered: function(){
+$(document).ready(function ($) {
+    // delegate calls to data-toggle="lightbox"
     $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
-      event.preventDefault();
-      return $(this).ekkoLightbox();
+        event.preventDefault();
+        return $(this).ekkoLightbox();
     });
-  }
 });
 ```
 
@@ -54,11 +54,15 @@ Template.temName.helpers({
 </template>
 ```
 
-Using jQuery initiate the control as datetime picker after the template has been rendered.
+Create a new JavaScript file, e.g. `client/js/client.js` and add the following.
 
 ```js
-Template.tempName.rendered = function() {
-    $('#my-lightbox').ekkoLightbox(options);
-}
+$(document).ready(function ($) {
+    // delegate calls to data-toggle="lightbox"
+    $(document).delegate('#my-lightbox', 'click', function(event) {
+        event.preventDefault();
+        return $(this).ekkoLightbox();
+    });
+});
 ```
-For more details please visit the [original author's GitHub page](http://ashleydw.github.io/lightbox/).
+The only difference between the two approaches above is the selector that's being used to delegate the click event. For more details please visit the [original author's GitHub page](http://ashleydw.github.io/lightbox/).
