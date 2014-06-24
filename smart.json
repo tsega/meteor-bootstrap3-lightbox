@@ -3,7 +3,7 @@
   "description": "Bootstrap 3 Lightbox from ashleydw, https://github.com/ashleydw/lightbox, packaged for Meteor.js",
   "homepage": "https://github.com/tsega/meteor-bootstrap3-lightbox",
   "author": "Tsegaselassie Tadesse <tsegaselassi@gmail.com>",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "git": "https://github.com/tsega/meteor-bootstrap3-lightbox.git",
   "packages": {
   }
